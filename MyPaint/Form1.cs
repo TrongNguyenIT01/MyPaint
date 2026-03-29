@@ -16,16 +16,23 @@ namespace MyPaint
         {
             InitializeComponent();
         }
-
+        Bitmap canvas;
         private void Form1_Load(object sender, EventArgs e)
         {
+            canvas = new Bitmap(panelPaint.Width, panelPaint.Height);
+        
+
             btnColorBorder.BackColor = BorderColor;
             btnColorFill.BackColor = FillColor;
+            cbType.SelectedIndex = 0;
         }
 
         private void panelPaint_Paint(object sender, PaintEventArgs e)
         {
-
+            if (canvas != null)
+            {
+                e.Graphics.DrawImage(canvas, 0, 0);
+            }
         }
         bool isDrawing = false;
         Point strartPoint;
@@ -41,6 +48,59 @@ namespace MyPaint
 
         private void panelPaint_MouseUp(object sender, MouseEventArgs e)
         {
+            Pen pen = new Pen(BorderColor, (int)numSize.Value);
+            SolidBrush brush = new SolidBrush(FillColor);
+            var width = Math.Abs(e.X - strartPoint.X);
+            var height = Math.Abs(e.Y - strartPoint.Y);
+            var x = Math.Min(e.X, strartPoint.X);
+            var y = Math.Min(e.Y, strartPoint.Y);
+            using (Graphics g = Graphics.FromImage(canvas))
+                switch (cbType.SelectedIndex) {
+                case 1:
+                    g.DrawLine(new Pen(BorderColor, (int)numSize.Value), strartPoint, e.Location);
+                    break;
+                case 2:
+                    g.DrawRectangle(pen, x, y, width, height);
+                   
+                    break;
+                case 3:
+                    g.DrawEllipse(pen, x, y, width, height); break;
+                case 4:
+                    g.FillRectangle(brush, x, y, width, height);
+                    break;
+                case 5:
+                    g.FillEllipse(brush, x, y, width, height);
+                    break;
+                case 6:
+                    g.DrawString("Hello", new Font("Arial", 20), brush, e.Location);
+                    break;
+                case 7:
+                    Point p1 = strartPoint;
+                    Point p2 = new Point(e.X, strartPoint.Y);
+                    Point p3 = new Point(strartPoint.X, e.Y);
+                    
+                    Point[] tri = { p1, p2, p3 };
+                    g.DrawPolygon(pen, tri);
+                    break;
+                case 8:
+                    var x1 = Math.Min(e.X, strartPoint.X);
+                    var y1 = Math.Min(e.Y, strartPoint.Y);
+                    var width1 = Math.Abs(e.X - strartPoint.X);
+                    var height1 = Math.Abs(e.Y - strartPoint.Y);
+
+                    Point top = new Point(x1 + width1 / 2, y1);
+                    Point right = new Point(x1+ width1, y1 + height1 / 2);
+                    Point bottom = new Point(x1 + width1 / 2, y1 + height1);
+                    Point left = new Point(x1, y1 + height1 / 2);
+
+                    Point[] diamond = { top, right, bottom, left };
+
+                  
+                    g.DrawPolygon(pen, diamond);
+                    break;
+            }
+
+            panelPaint.Invalidate();
             isDrawing = false;
         }
 
@@ -65,9 +125,17 @@ namespace MyPaint
         private void panelPaint_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDrawing) {
-                Graphics g = panelPaint.CreateGraphics();
-                g.DrawLine(Pens.Black, strartPoint, e.Location);
-                strartPoint = e.Location;
+                if (cbType.SelectedIndex == 0)
+                {
+                    using (Graphics g = Graphics.FromImage(canvas)  )
+                    {
+                        g.DrawLine(new Pen(BorderColor, (int)numSize.Value), strartPoint, e.Location);
+                    }
+                    strartPoint = e.Location;
+                    panelPaint.Invalidate();
+                }
+   
+
             }
         }      
     }
