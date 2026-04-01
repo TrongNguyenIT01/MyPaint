@@ -285,7 +285,7 @@ namespace MyPaint
             {
                 case 1: // LinearGradientBrush
                     return new System.Drawing.Drawing2D.LinearGradientBrush(
-                        rect, BorderColor, FillColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
+                        rect, FillColor2, FillColor, System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal);
 
                 case 2: // PathGradientBrush (Tô từ tâm ra)
                     System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
