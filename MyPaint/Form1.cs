@@ -20,8 +20,10 @@ namespace MyPaint
         private void Form1_Load(object sender, EventArgs e)
         {
             canvas = new Bitmap(panelPaint.Width, panelPaint.Height);
-        
-
+            using (Graphics g = Graphics.FromImage(canvas))
+            {
+                g.Clear(Color.White);
+            }
             btnColorBorder.BackColor = BorderColor;
             btnColorFill.BackColor = FillColor;
             cbType.SelectedIndex = 0;
@@ -120,6 +122,36 @@ namespace MyPaint
                 FillColor = cd.Color;
                 btnColorFill.BackColor = FillColor;
             } 
+        }
+
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PNG Image|*.png|JPEG Image|*.jpg";
+            sfd.Title = "Save Image";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string ext = System.IO.Path.GetExtension(sfd.FileName).ToLower();
+
+                    if (ext == ".jpg")
+                    {
+                        canvas.Save(sfd.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    }
+                    else
+                    {
+                        canvas.Save(sfd.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                    }
+
+                    MessageBox.Show("Lưu ảnh thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
         }
 
         private void panelPaint_MouseMove(object sender, MouseEventArgs e)

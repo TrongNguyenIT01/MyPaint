@@ -44,6 +44,7 @@
             this.panelPaint = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnsave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +75,7 @@
             // panelTool
             // 
             this.panelTool.BackColor = System.Drawing.SystemColors.Info;
+            this.panelTool.Controls.Add(this.btnsave);
             this.panelTool.Controls.Add(this.grbFill);
             this.panelTool.Controls.Add(this.grbBorder);
             this.panelTool.Controls.Add(this.cbType);
@@ -221,6 +223,17 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // btnsave
+            // 
+            this.btnsave.BackColor = System.Drawing.Color.Red;
+            this.btnsave.Location = new System.Drawing.Point(16, 530);
+            this.btnsave.Name = "btnsave";
+            this.btnsave.Size = new System.Drawing.Size(228, 48);
+            this.btnsave.TabIndex = 4;
+            this.btnsave.Text = "Save Image";
+            this.btnsave.UseVisualStyleBackColor = false;
+            this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -262,6 +275,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnColorFill;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnsave;
     }
 }
 
