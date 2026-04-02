@@ -17,16 +17,36 @@ namespace MyPaint
             InitializeComponent();
         }
         Bitmap canvas;
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            canvas = new Bitmap(panelPaint.Width, panelPaint.Height);
-            using (Graphics g = Graphics.FromImage(canvas))
-            {
-                g.Clear(Color.White);
-            }
+            panelPaint.Resize += panelPaint_Resize;
+
+            panelPaint_Resize(null, null); 
             btnColorBorder.BackColor = BorderColor;
             btnColorFill.BackColor = FillColor;
             cbType.SelectedIndex = 0;
+        }
+        private void panelPaint_Resize(object sender, EventArgs e)
+        {
+            if (panelPaint.Width <= 0 || panelPaint.Height <= 0) return;
+
+            Bitmap newCanvas = new Bitmap(panelPaint.Width, panelPaint.Height);
+
+            using (Graphics g = Graphics.FromImage(newCanvas))
+            {
+                g.Clear(Color.White);
+
+                if (canvas != null)
+                {
+                    g.DrawImage(canvas, 0, 0);
+                    canvas.Dispose();
+                }
+            }
+
+            canvas = newCanvas;
+            panelPaint.Invalidate();
         }
 
         private void panelPaint_Paint(object sender, PaintEventArgs e)
