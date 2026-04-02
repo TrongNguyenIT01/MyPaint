@@ -55,6 +55,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.btnxoabanve = new System.Windows.Forms.Button();
+            this.btnabout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -88,6 +89,7 @@
             // 
             this.panelTool.BackColor = System.Drawing.SystemColors.Info;
             this.panelTool.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTool.Controls.Add(this.btnabout);
             this.panelTool.Controls.Add(this.btnxoabanve);
             this.panelTool.Controls.Add(this.btnFont);
             this.panelTool.Controls.Add(this.btnsave);
@@ -371,6 +373,16 @@
             this.btnxoabanve.UseVisualStyleBackColor = true;
             this.btnxoabanve.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnabout
+            // 
+            this.btnabout.Location = new System.Drawing.Point(16, 744);
+            this.btnabout.Name = "btnabout";
+            this.btnabout.Size = new System.Drawing.Size(229, 45);
+            this.btnabout.TabIndex = 7;
+            this.btnabout.Text = "About";
+            this.btnabout.UseVisualStyleBackColor = true;
+            this.btnabout.Click += new System.EventHandler(this.btnabout_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -426,6 +438,7 @@
         private System.Windows.Forms.Button btnPicture;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnxoabanve;
+        private System.Windows.Forms.Button btnabout;
     }
 }
 

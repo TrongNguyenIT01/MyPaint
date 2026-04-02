@@ -295,6 +295,14 @@ namespace MyPaint
             }
         }
 
+        private void btnabout_Click(object sender, EventArgs e)
+        {
+            {
+                Thongtin f = new Thongtin();
+                f.ShowDialog();
+            }
+        }
+
         private Brush GetBrush(Rectangle rect)
         {
             // Tránh lỗi nếu Rectangle có kích thước 0
