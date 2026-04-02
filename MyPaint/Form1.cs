@@ -345,5 +345,16 @@ namespace MyPaint
             }
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (canvas != null)
+            {
+                using (Graphics g = Graphics.FromImage(canvas))
+                {
+                    g.Clear(Color.White);
+                }
+                panelPaint.Invalidate();
+            }
+        }
     }
 }
