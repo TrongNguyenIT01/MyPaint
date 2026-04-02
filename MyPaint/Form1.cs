@@ -309,7 +309,17 @@ namespace MyPaint
 
                 case 2: // PathGradientBrush (Tô từ tâm ra)
                     System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-                    path.AddEllipse(rect);
+
+                    // KIỂM TRA LOẠI HÌNH ĐANG VẼ
+                    if (cbType.SelectedIndex == 5) // Nếu là hình tròn (FillEllipse)
+                    {
+                        path.AddEllipse(rect);
+                    }
+                    else // Các trường hợp còn lại (Hình chữ nhật, Đa giác...)
+                    {
+                        path.AddRectangle(rect);
+                    }
+
                     var pgb = new System.Drawing.Drawing2D.PathGradientBrush(path);
                     pgb.CenterColor = FillColor;
                     pgb.SurroundColors = new Color[] { FillColor2 };
