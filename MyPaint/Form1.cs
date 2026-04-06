@@ -130,6 +130,17 @@ namespace MyPaint
 
                         g.DrawPolygon(pen, diamond);
                         break;
+                    case 9:
+                    Pen eraser = new Pen(Color.White, (int)numSize.Value);
+                 
+                    eraser.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+                    eraser.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+                    g.DrawLine(eraser, strartPoint, e.Location);
+                
+                    strartPoint = e.Location;
+                    panelPaint.Invalidate();
+                        break;
                 }
                 brush.Dispose();
             }
@@ -214,7 +225,9 @@ namespace MyPaint
 
 
             }
+           
         }
+        
 
         Font Font = new Font("Arial", 20);
         private void btnFont_Click(object sender, EventArgs e)
